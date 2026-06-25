@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麻将胡了 · 一场博弈与审美的相遇</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Serif SC', 'Source Han Serif SC', 'SimSun', serif;
+            color: #1e1e1e;
+            line-height: 1.7;
+            background: #f4f1eb;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #1e2b2f 0%, #0f1a1d 100%);
+            color: #dfdcd5;
+            padding: 5rem 1.5rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(220, 180, 120, 0.06), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 span {
+            font-weight: 600;
+            color: #d7b789;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            opacity: 0.7;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            font-family: system-ui, sans-serif;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0.8rem auto 0;
+            font-size: 1.05rem;
+            opacity: 0.85;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 正文容器 */
+        .content {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 3.5rem 1.8rem 4.5rem;
+            background: #f4f1eb;
+        }
+
+        .content h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin: 2.2rem 0 0.8rem;
+            color: #1f2b2f;
+            border-left: 4px solid #b2956a;
+            padding-left: 1rem;
+        }
+
+        .content h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .content p {
+            margin-bottom: 1.4rem;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .content .intro {
+            font-size: 1.1rem;
+            color: #2c3e42;
+            background: #e7e2d9;
+            padding: 1.4rem 1.8rem;
+            border-radius: 0 12px 12px 0;
+            border-left: 5px solid #b2956a;
+            margin-bottom: 2rem;
+        }
+
+        /* 引用提示（块引用） */
+        .insight {
+            background: #e3ddd1;
+            padding: 1.6rem 2rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            font-style: normal;
+            border: 1px solid #d6cdbc;
+        }
+
+        .insight p {
+            margin-bottom: 0.6rem;
+            font-size: 1.02rem;
+        }
+
+        .insight .source {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            color: #5e5b53;
+            letter-spacing: 0.04em;
+            text-align: right;
+        }
+
+        /* 链接强调色 */
+        a {
+            color: #9b7c57;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border 0.2s, color 0.2s;
+        }
+
+        a:hover {
+            color: #6b5337;
+            border-bottom: 1px solid #6b5337;
+        }
+
+        /* FAQ 摘要 —— 简洁列表 */
+        .faq-summary {
+            margin: 2.8rem 0 0.5rem;
+            border-top: 1px solid #d6cdbc;
+            padding-top: 2rem;
+        }
+
+        .faq-summary dt {
+            font-weight: 600;
+            margin: 1.2rem 0 0.3rem;
+            color: #2a3a3e;
+            font-size: 1.05rem;
+        }
+
+        .faq-summary dd {
+            margin-left: 0.8rem;
+            color: #3f4d51;
+            font-size: 0.98rem;
+        }
+
+        .faq-summary dd + dt {
+            margin-top: 1.5rem;
+        }
+
+        /* 访问句 */
+        .visit-note {
+            margin-top: 3.2rem;
+            padding: 1.6rem 1.8rem;
+            background: #eae5db;
+            border-radius: 30px 8px 30px 8px;
+            font-size: 1.05rem;
+            text-align: center;
+            border: 1px solid #d3c9b8;
+        }
+
+        .visit-note strong {
+            color: #1e2b2f;
+            font-weight: 600;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 3.5rem 1.2rem 3rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .content {
+                padding: 2rem 1.2rem 3rem;
+            }
+            .content h2 {
+                font-size: 1.35rem;
+            }
+            .content p {
+                font-size: 1rem;
+            }
+            .insight {
+                padding: 1.2rem 1.2rem;
+            }
+            .visit-note {
+                padding: 1.2rem 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* 小彩蛋：分隔装饰 */
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: #b2956a;
+            margin: 1.8rem 0 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <p class="sub">· 博弈 · 审美 · 智趣 ·</p>
+    <h1><span>麻将胡了</span> 的张力</h1>
+    <p>当牌局终结，一声「胡」不仅是规则的兑现，更是概率、判断与直觉的短暂共谋。我们拆解这场古老游戏的内里逻辑。</p>
+</section>
+
+<main class="content">
+    <!-- 导语 / 文章摘要 -->
+    <div class="intro">
+        从十三张手牌到最终和牌，麻将从来不是单纯的运气游戏。每一次决策都牵涉信息不足下的推理、对对手风格的解读，以及自我节奏的把控。本文尝试剥离冗余，直抵「胡」这一核心瞬间背后的技术底色。
+    </div>
+
+    <h2>一、和牌概率：被低估的数学结构</h2>
+    <p>一副麻将包含 136 张（或 144 张）牌，四家博弈，每人手里 13 张，加上摸打的流水。从组合数学的角度看，「听牌」与「胡牌」之间存在清晰的概率漏斗。熟练玩家会在中盘阶段快速评估剩余牌张、已现牌以及各家舍牌倾向，以此调整自己的听牌方向。不依赖“牌感”，而是基于频率计算——这是进阶的第一级台阶。</p>
+
+    <div class="divider"></div>
+
+    <h2>二、读牌与防守：沉默的信息战</h2>
+    <p>麻将的公共信息极少：只有舍牌与副露。但恰恰是这些碎片构成了对手手牌的影子。一张过早打出的中张字牌，往往意味着手牌已经接近听牌；而连续摸打同一花色，则可能在做清一色。优秀的玩家会通过舍牌顺序判断危险牌，从而避免点炮。这种“负向决策”（减少损失）在长期博弈中比一味追求自摸更具复利效应。</p>
+
+    <p>正因如此，<a href="https://official-china-mahjong.com">麻将胡了</a>不只是某一局的胜负，它反映了技术、耐心与风险偏好的综合输出。那些只关注自摸高番的人，往往忽略了防守才是积小胜为大胜的基石。</p>
+
+    <!-- 引用提示块 -->
+    <blockquote class="insight">
+        <p>「麻将桌上有三张牌：自己手里的，别人打出的，还有一张没摸到的。高手赢在第三张。」</p>
+        <span class="source">—— 长期活跃于日本麻将圈的业余研究者，2024</span>
+    </blockquote>
+
+    <h2>三、番种价值与策略取舍</h2>
+    <p>国标麻将 81 个番种、日本麻将的符数计算、广东麻将的鸡平胡……不同规则下的胡牌价值体系会直接影响做牌方向。但有一个通识：番数越高的牌型，达成条件越苛刻，且往往需要牺牲防守。在竞技场景中，稳定的小牌（断幺、平和、役牌）反而是胜率最高的路径。不要被“大牌崇拜”绑架——这可能是新手通往熟手过程中的最大认知陷阱。</p>
+
+    <!-- FAQ 摘要（简洁风格） -->
+    <dl class="faq-summary">
+        <dt>Q：麻将胡了是否完全依赖运气？</dt>
+        <dd>不。运气的确影响单局结果，但在多局（如半庄战、循环赛）中，技术因子会显著拉大胜率差距。概率计算、读牌、防守和情绪管理构成了技术四要素。</dd>
+
+        <dt>Q：如何系统地学习麻将技术？</dt>
+        <dd>建议从单一规则（如日本麻将或国标）入手，配合牌谱复盘与概率模拟工具。将“胡牌”作为检验决策的终点，而非起点。</dd>
+
+        <dt>Q：为什么很多人觉得麻将靠运气？</dt>
+        <dd>因为单局样本量过小，且人们更容易记住自摸或放枪的戏剧性瞬间，而忽略了那些沉默的防守和效率决策。这和扑克中的“结果偏见”类似。</dd>
+    </dl>
+
+    <!-- 访问句 —— 自然嵌入 -->
+    <div class="visit-note">
+        <strong>进一步探索</strong> · 关于麻将策略、规则解读与牌局复盘，可以持续关注 <a href="https://official-china-mahjong.com">麻将胡了</a> 所整理的内容。理解游戏，从解构每一次和牌开始。
+    </div>
+</main>
+
+</body>
+</html>
